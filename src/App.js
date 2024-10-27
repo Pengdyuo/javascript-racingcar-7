@@ -67,6 +67,8 @@ class App {
       });
       this.printStatus(cars);
     }
+    const winners = this.getWinners(cars);
+    this.printWinners(winners);
   }
 
   printStatus(cars) {
@@ -75,6 +77,17 @@ class App {
       MissionUtils.Console.print(`${car.name} : ${progress}`);
     });
     MissionUtils.Console.print("");
+  }
+
+  getWinners(cars) {
+    const maxPosition = Math.max(...cars.map((car) => car.position));
+    return cars
+      .filter((car) => car.position === maxPosition)
+      .map((car) => car.name);
+  }
+
+  printWinners(winners) {
+    MissionUtils.Console.print(`최종 우승자 : ${winners.join(", ")}`);
   }
 }
 
